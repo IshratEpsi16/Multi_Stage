@@ -7,22 +7,22 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'react-router-dom';
-const ProductList = ({ products }) => {
+const InventoryList = ({ product }) => {
     const [rows, setRows] = useState([]);
     const [open, setOpen] = useState(false);
     const [modalContent, setModalContent] = useState('');
     const [selectedRowId, setSelectedRowId] = useState(null);
 
     useEffect(() => {
-        const initialRows = products.map((product, index) => ({
+        const initialRows = product.map((prod, index) => ({
             id: index + 1,
-            ...product,
+            ...prod,
         }));
         setRows(initialRows);
-    }, [products]);
+    }, [product]);
 
-    const handleOpen = (description, id) => {
-        setModalContent(description);
+    const handleOpen = (length, id) => {
+        setModalContent(length);
         setSelectedRowId(id);
         setOpen(true);
     };
@@ -38,24 +38,24 @@ const ProductList = ({ products }) => {
 
         // Remove the deleted product from the localStorage
         const updatedProducts = updatedRows.map(row => ({
-            title: row.title,
-            description: row.description,
-            category: row.category,
-            price: row.price,
-            extra: row.extra,
-            amount: row.amount,
+            weight: row.weight,
+            length: row.length,
+            height: row.height,
+            width: row.width,
+            stock: row.stock,
+
         }));
-        localStorage.setItem('products', JSON.stringify(updatedProducts));
+        localStorage.setItem('product', JSON.stringify(updatedProducts));
     };
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'title', headerName: 'Title', width: 150 },
-        { field: 'description', headerName: 'Description', width: 200 },
-        { field: 'category', headerName: 'Category', width: 130 },
-        { field: 'price', headerName: 'Price', width: 100 },
-        { field: 'extra', headerName: 'Extra Price', width: 100 },
-        { field: 'amount', headerName: 'Tax Amount', width: 100 },
+        { field: 'weight', headerName: 'Weight', width: 150 },
+        { field: 'length', headerName: 'Length', width: 200 },
+        { field: 'height', headerName: 'Height', width: 130 },
+        { field: 'width', headerName: 'Width', width: 100 },
+        { field: 'stock', headerName: 'Total Stock', width: 100 },
+
         {
             field: 'action',
             headerName: 'Action',
@@ -64,7 +64,7 @@ const ProductList = ({ products }) => {
                 <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => handleOpen(params.row.description, params.row.id)}
+                    onClick={() => handleOpen(params.row.length, params.row.id)}
                 >
                     View
                 </Button>
@@ -97,15 +97,15 @@ const ProductList = ({ products }) => {
                 </Link>
             </div>
             <div style={{ height: 400, width: '100%' }}>
-                <h1 className='text-center font-bold text-blue-600 text-3xl m-5 p-5'>Product List</h1>
+                <h1 className='text-center font-bold text-blue-600 text-3xl m-5 p-5'>Inventory List</h1>
                 <DataGrid rows={rows} columns={columns} pageSize={5} />
 
                 {/* Modal */}
                 <Modal
                     open={open}
                     onClose={handleClose}
-                    aria-labelledby="modal-title"
-                    aria-describedby="modal-description"
+                    aria-labelledby="modal-weight"
+                    aria-describedby="modal-length"
                 >
                     <Box
                         sx={{
@@ -120,10 +120,10 @@ const ProductList = ({ products }) => {
                             p: 4,
                         }}
                     >
-                        <Typography id="modal-title" variant="h6" component="h2">
-                            Product Description
+                        <Typography id="modal-weight" variant="h6" component="h2">
+                            Details
                         </Typography>
-                        <Typography id="modal-description" sx={{ mt: 2 }}>
+                        <Typography id="modal-length" sx={{ mt: 2 }}>
                             {modalContent}
                         </Typography>
                         <Button
@@ -141,8 +141,8 @@ const ProductList = ({ products }) => {
     );
 };
 
-ProductList.propTypes = {
-    products: PropTypes.arrayOf(
+InventoryList.propTypes = {
+    product: PropTypes.arrayOf(
         PropTypes.shape({
             title: PropTypes.string.isRequired,
             description: PropTypes.string.isRequired,
@@ -154,4 +154,4 @@ ProductList.propTypes = {
     ).isRequired,
 };
 
-export default ProductList;
+export default InventoryList;
