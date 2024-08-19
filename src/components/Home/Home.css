@@ -1,0 +1,60 @@
+.firstRow {
+    display: flex;
+    align-items: flex-end;
+    /* Aligns items at the bottom of the container */
+    gap: 70px;
+    /* Space between the two main sections */
+    margin-left: 40%;
+    margin-top: 5%;
+}
+
+.products,
+.inventory {
+    display: flex;
+    flex-direction: column;
+    /* Stack the button and text vertically */
+    align-items: center;
+    /* Center-align the items horizontally */
+    gap: 5px;
+    /* Space between the button and the text */
+    border: 2px solid #ccc;
+    /* Border width and color */
+    padding: 10px;
+    /* Adds padding inside the border */
+    border-radius: 8px;
+    /* Optional: rounds the corners of the border */
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    /* Vertically center the SVG inside the button */
+    justify-content: center;
+}
+
+.secondRow {
+    display: flex;
+    align-items: flex-end;
+    /* Aligns items at the bottom of the container */
+    gap: 70px;
+    /* Space between the two main sections */
+    margin-left: 40%;
+    margin-top: 4%;
+}
+
+.photo,
+.review {
+    display: flex;
+    flex-direction: column;
+    /* Stack the button and text vertically */
+    align-items: center;
+    /* Center-align the items horizontally */
+    gap: 5px;
+    /* Space between the button and the text */
+    border: 2px solid #ccc;
+    /* Border width and color */
+    padding: 10px;
+    /* Adds padding inside the border */
+    border-radius: 8px;
+    /* Optional: rounds the corners of the border */
+}
